@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Birthday Surprise</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="gift">
+            🎁
+        </div>
+
+        <h1>
+            A Surprise Awaits...
+        </h1>
+
+        <p>
+            Someone made something special for you ❤️
+        </p>
+
+        <p>
+            Enter the secret birthday to continue.
+        </p>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="DDMMYYYY"
+        >
+
+        <button onclick="unlock()">
+            🔓 Unlock Surprise
+        </button>
+
+        <p id="message"></p>
+
+    </div>
+    <div class="birthday-screen">
+        <div class="floating-elements">
+
+    <div class="balloon balloon1">🎈</div>
+    <div class="balloon balloon2">🎈</div>
+    <div class="balloon balloon3">🎈</div>
+
+    <div class="heart heart1">❤️</div>
+    <div class="heart heart2">❤️</div>
+    <div class="heart heart3">❤️</div>
+    <div class="heart heart1">💖</div>
+    <div class="heart heart2">💖</div>
+    <div class="heart heart3">💖</div>
+
+</div>
+
+    <div class="birthday-content">
+        <audio id="birthdayMusic" loop>
+
+    <source
+        src="music/birthday.mp3"
+        type="audio/mpeg"
+    >
+
+</audio>
+
+        <div class="cake">
+            🎂
+        </div>
+
+        <h1>
+            HAPPY BIRTHDAY
+        </h1>
+
+        <h2>
+            Rishu ❤️
+        </h2>
+
+        <p>
+            Today is all about you ✨
+        </p>
+
+    </div>
+    
+    <div class="memories">
+        <div class="letter-section">
+
+    <div class="letter">
+
+        <div class="letter-icon">
+            💌
+        </div>
+
+        <h2>
+            A Letter For You
+        </h2>
+
+        <p id="letterText"></p>
+
+        <button onclick="startLetter()">
+            Open Letter ❤️
+        </button>
+
+    </div>
+    <div class="final-section">
+
+    <button onclick="showFinalSurprise()">
+        One Last Thing... 👀
+    </button>
+
+    <div id="finalSurprise" class="final-surprise">
+
+        <div class="final-emoji">
+            🎉🎂❤️
+        </div>
+
+        <h1>
+            HAPPY BIRTHDAY!
+        </h1>
+
+        <h2>
+            Rishu ❤️
+        </h2>
+
+        <p>
+            I hope this little surprise made you smile.
+        </p>
+
+        <p>
+            Have an amazing year ahead! ✨
+        </p>
+
+    </div>
+
+</div>
+
+</div>
+
+    <h2>
+        ✨ Our Memories ✨
+    </h2>
+
+    <div class="photo-box">
+
+        <img
+            id="memoryPhoto"
+            src="images/photo1.jpg"
+        >
+
+    </div>
+
+    <p id="memoryText">
+        A beautiful memory ❤️
+    </p>
+
+    <div class="photo-buttons">
+
+        <button onclick="previousPhoto()">
+            ←
+        </button>
+
+        <button onclick="nextPhoto()">
+            →
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+
+    <script>
+
+        function unlock() {
+
+            let password =
+                document.getElementById("password").value;
+
+            if (password === "09092010") {
+
+            document.querySelector(".container").style.display = "none";
+
+            document.querySelector(".birthday-screen").style.display = "flex";
+            document.getElementById("birthdayMusic").play();
+
+
+
+            }
+
+            else {
+
+                document.getElementById("message").innerHTML =
+                    "❌ Wrong date! Try again 😭";
+
+            }
+
+        }
+        let currentPhoto = 0;
+
+
+const photos = [
+
+    "images/photo1.jpg",
+
+    "images/photo2.jpg",
+
+    "images/photo3.jpg",
+
+    "images/photo4.jpg"
+
+];
+
+
+const messages = [
+
+    "A beautiful memory ❤️",
+
+    "The depth in your eyes ✨",
+
+    "Meri madamm jiii 🥹",
+
+    "And there are many more to come ❤️"
+
+];
+
+
+function showPhoto() {
+
+    document.getElementById("memoryPhoto").src =
+        photos[currentPhoto];
+
+    document.getElementById("memoryText").innerHTML =
+        messages[currentPhoto];
+
+}
+
+
+function nextPhoto() {
+
+    currentPhoto++;
+
+    if (currentPhoto >= photos.length) {
+
+        currentPhoto = 0;
+
+    }
+
+    showPhoto();
+
+}
+
+
+function previousPhoto() {
+
+    currentPhoto--;
+
+    if (currentPhoto < 0) {
+
+        currentPhoto = photos.length - 1;
+
+    }
+
+    showPhoto();
+
+}
+    const letterMessage = `Happy Birthday! ❤️
+
+    I just wanted to make something a little different for you.
+
+    I hope this year brings you lots of happiness, laughter, and unforgettable memories.
+
+    Thank you for all the moments and memories.
+
+    Stay exactly the amazing person you are.
+
+    And once again...
+
+    Happy Birthday! 🎂❤️`;
+    let letterIndex = 0;
+
+
+function startLetter() {
+
+    letterIndex = 0;
+
+    document.getElementById("letterText").innerHTML = "";
+
+    typeLetter();
+
+}
+
+
+function typeLetter() {
+
+    if (letterIndex < letterMessage.length) {
+
+        document.getElementById("letterText").innerHTML +=
+            letterMessage.charAt(letterIndex);
+
+        letterIndex++;
+
+        setTimeout(typeLetter, 35);
+
+    }
+
+}
+function showFinalSurprise() {
+
+    document.getElementById("finalSurprise").style.display = "block";
+
+    createConfetti();
+
+}function createConfetti() {
+
+    for (let i = 0; i < 80; i++) {
+
+        let confetti =
+            document.createElement("div");
+
+        confetti.className = "confetti";
+
+        confetti.style.left =
+            Math.random() * 100 + "vw";
+
+        confetti.style.animationDelay =
+            Math.random() * 2 + "s";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(function () {
+
+            confetti.remove();
+
+        }, 5000);
+
+    }
+
+}
+    </script>
+
+</body>
+
+</html>
